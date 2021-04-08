@@ -1,6 +1,5 @@
 FROM quay.io/keycloak/keycloak-x
 
-ADD rekinit.sh /
 ADD krb5.conf /etc/krb5.conf
 
 USER root
