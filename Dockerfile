@@ -1,4 +1,5 @@
-FROM quay.io/keycloak/keycloak-x
+FROM jboss/keycloak
+
 
 ADD krb5.conf /etc/krb5.conf
 
@@ -12,4 +13,5 @@ USER jboss
 VOLUME ["/krb5","/dev/shm","/etc/krb5.conf.d"]
 
 USER 1000
+
 
