@@ -1,4 +1,4 @@
-FROM rh-sso-7/sso76-openshift-rhel8:latest
+FROM registry.redhat.io/rh-sso-7/sso76-openshift-rhel8:latest
 
 
 ADD krb5.conf /etc/krb5.conf
