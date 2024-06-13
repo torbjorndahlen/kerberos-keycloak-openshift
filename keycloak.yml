@@ -4,6 +4,7 @@ metadata:
   name: keycloak
 spec:
   instances: 1
+  image: keycloak-rhel9-krb5:latest
   db:
     vendor: postgres
     host: postgresql
@@ -17,8 +18,5 @@ spec:
     tlsSecret: keycloak-tls-secret
   hostname:
     hostname: rhbk-rhbk-demo.apps.cluster-bxlld.dynamic.redhatworkshops.io
-  truststores:
-    keycloak-truststore:
-      secret:
-        name: adfs-tls-secret
+  
   

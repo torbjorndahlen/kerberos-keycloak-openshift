@@ -1,2 +1,4 @@
 10018769-tdahlen-pull-secret.yaml
+keycloak-cert.pem
+keycloak-key.pem
 .DS_store*
