@@ -13,7 +13,7 @@ RUN mkdir -p /mnt/rootfs && \
     mkdir /krb5 && chmod 755 /krb5
 RUN dnf install --installroot /mnt/rootfs krb5-workstation --releasever 9 --setopt install_weak_deps=false --nodocs -y && \
     dnf --installroot /mnt/rootfs clean all && \
-    rpm --root /mnt/rootfs -e --nodeps setup &&
+    rpm --root /mnt/rootfs -e --nodeps setup
     
 
 FROM registry.redhat.io/rhbk/keycloak-rhel9:24
