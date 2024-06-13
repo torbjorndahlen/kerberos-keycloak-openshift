@@ -3,7 +3,7 @@ FROM registry.redhat.io/rhbk/keycloak-rhel9:24 as builder
 ADD krb5.conf /etc/krb5.conf
 ADD rhbk.keytab /opt/keycloak/conf/rhbk.keytab
 
-FROM registry.redhat.io/rhbk/keycloak-rhel9
+FROM registry.redhat.io/rhbk/keycloak-rhel9:24
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 #USER root
@@ -16,7 +16,7 @@ RUN dnf install --installroot /mnt/rootfs krb5-workstation --releasever 9 --seto
     rpm --root /mnt/rootfs -e --nodeps setup &&
     
 
-FROM registry.redhat.io/rhbk/keycloak-rhel9
+FROM registry.redhat.io/rhbk/keycloak-rhel9:24
 COPY --from=ubi-micro-build /mnt/rootfs /
 
 VOLUME ["/krb5","/dev/shm","/etc/krb5.conf.d"]
