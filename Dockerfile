@@ -1,18 +1,26 @@
-FROM registry.redhat.io/rh-sso-7/sso76-openshift-rhel8:latest
-
+FROM registry.redhat.io/rhbk/keycloak-rhel9:24 as builder
 
 ADD krb5.conf /etc/krb5.conf
-ADD sso-sso-demo.keytab /opt/jboss/keycloak/standalone/configuration/sso-sso-demo.keytab
+ADD rhbk.keytab /opt/keycloak/conf/rhbk.keytab
 
-USER root
+FROM registry.redhat.io/rhbk/keycloak-rhel9
+COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
-RUN microdnf install -y krb5-workstation && \
-    mkdir /krb5 && chmod 755 /krb5 
+#USER root
 
-USER jboss
+FROM registry.access.redhat.com/ubi9 AS ubi-micro-build
+RUN mkdir -p /mnt/rootfs &&
+    mkdir /krb5 && chmod 755 /krb5
+RUN dnf install --installroot /mnt/rootfs krb5-workstation --releasever 9 --setopt install_weak_deps=false --nodocs -y && \
+    dnf --installroot /mnt/rootfs clean all && \
+    rpm --root /mnt/rootfs -e --nodeps setup &&
+    
+
+FROM registry.redhat.io/rhbk/keycloak-rhel9
+COPY --from=ubi-micro-build /mnt/rootfs /
 
 VOLUME ["/krb5","/dev/shm","/etc/krb5.conf.d"]
 
-USER 1001
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
 
 
