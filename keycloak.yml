@@ -4,7 +4,7 @@ metadata:
   name: keycloak
 spec:
   instances: 1
-  image: keycloak-rhel9-krb5:latest
+  image: rhbk-demo/keycloak-rhel9-krb5:latest
   db:
     vendor: postgres
     host: postgresql
