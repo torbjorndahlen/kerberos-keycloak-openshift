@@ -28,6 +28,13 @@ COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 #VOLUME ["/krb5","/dev/shm","/etc/krb5.conf.d"]
 
+# change these values to point to a running postgres instance
+ENV KC_DB=postgres
+ENV KC_DB_URL=postgresql.rhbk-demo.svc.cluster.local
+ENV KC_DB_USERNAME=keycloak
+ENV KC_DB_PASSWORD=keycloak
+ENV KC_HOSTNAME=rhbk-rhbk-demo.apps.cluster-bxlld.dynamic.redhatworkshops.io
+
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
 
 
