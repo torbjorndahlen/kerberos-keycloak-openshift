@@ -1,10 +1,17 @@
 FROM registry.redhat.io/rhbk/keycloak-rhel9:24 as builder
 
-#ADD krb5.conf /etc/krb5.conf
-#ADD rhbk.keytab /opt/keycloak/conf/rhbk.keytab
+# Enable health and metrics support
+ENV KC_HEALTH_ENABLED=true
+ENV KC_METRICS_ENABLED=true
+
+# Configure a database vendor
+ENV KC_DB=postgres
 
 FROM registry.redhat.io/rhbk/keycloak-rhel9:24
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
+
+#ADD krb5.conf /etc/krb5.conf
+#ADD rhbk.keytab /opt/keycloak/conf/rhbk.keytab
 
 #USER root
 
