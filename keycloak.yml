@@ -18,6 +18,6 @@ spec:
   http:
     tlsSecret: keycloak-tls-secret
   hostname:
-    hostname: rhbk-rhbk-demo.apps.cluster-bxlld.dynamic.redhatworkshops.io
+    hostname: rhbk-rhbk-demo.apps.cluster-zwh96.dynamic.redhatworkshops.io
   
   
