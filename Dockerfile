@@ -15,9 +15,7 @@ FROM registry.redhat.io/rhbk/keycloak-rhel9:24
 COPY --from=ubi-micro-build /mnt/rootfs /
 
 ADD krb5.conf /etc/krb5.conf
-
-USER keycloak
-ADD rhbk.keytab /opt/keycloak/conf/rhbk.keytab
+ADD --chown=keycloak rhbk.keytab /opt/keycloak/conf/rhbk.keytab
 
 VOLUME ["/krb5","/dev/shm","/etc/krb5.conf.d"]
 
